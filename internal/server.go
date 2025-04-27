@@ -7,6 +7,7 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/centodiechi/vanguard/routes"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -18,6 +19,8 @@ func StartServer() error {
 	router := gin.Default()
 
 	router.Use(cors.Default())
+
+	routes.RegisterAuthRoutes(router)
 
 	if err := godotenv.Load(".env"); err != nil {
 		log.Println("Error in loading env file %w", err)
